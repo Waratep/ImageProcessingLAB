@@ -42,26 +42,31 @@ plt.figure(1)
 threshold = [40,50,80,120,150,160,180,200,250,300]
 count = 1
 
-# fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-# out = cv2.VideoWriter('Lab02.avi',fourcc, 20.0, (magnitude_gradient.shape[1],magnitude_gradient.shape[0]),0)
+fourcc = cv2.VideoWriter_fourcc(*'DIVX')
+out = cv2.VideoWriter('Lab02.avi',fourcc, 2, (magnitude_gradient.shape[1],magnitude_gradient.shape[0]),0)
 
-# for th in threshold:
-#       ret , img_threshold = cv2.threshold(magnitude_gradient,th,723,cv2.THRESH_BINARY)
-#       img_threshold = np.uint8(img_threshold)
-#       out.write(img_threshold)
-# out.release()
-# plt.show()
+for th in threshold:
+      ret , img_threshold = cv2.threshold(magnitude_gradient,th,723,cv2.THRESH_BINARY)
+      img_threshold = np.uint8(img_threshold)
+      out.write(img_threshold)
 
-cap = cv2.VideoCapture('Lab02.avi')
-while(cap.isOpened()):
-      ret, frame = cap.read() 
-      cv2.imshow('frame',frame)
-      if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-      time.sleep(0.5)
+for i in range(10):
+      ret , img_threshold = cv2.threshold(magnitude_gradient,threshold[9-i],723,cv2.THRESH_BINARY)
+      img_threshold = np.uint8(img_threshold)
+      out.write(img_threshold)
+out.release()
+plt.show()
+
+# cap = cv2.VideoCapture('Lab02.avi')
+# while(cap.isOpened()):
+#       ret, frame = cap.read() 
+#       cv2.imshow('frame',frame)
+#       if cv2.waitKey(1) & 0xFF == ord('q'):
+#             break
+#       time.sleep(0.5)
  
-cap.release()
-cv2.destroyAllWindows()
+# cap.release()
+# cv2.destroyAllWindows()
 
 # plt.figure(1)
 # plt.subplot(231,title='1')
